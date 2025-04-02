@@ -1,18 +1,19 @@
-package oving3;
+
 
 import java.util.Arrays;
 
 public class CardDeck {
     public int n; // antall kort som skal legges til
     public String[] cardDeck;
+    public int topIndex; //holder styr på øverste kort i bunken.
 
     public CardDeck(int n) {
 
         // n må være mellom 1 og 13, alle andre verdier er ugydlig
         validateInput(n);
         this.n = n;
-
         this.cardDeck = new String[4 * n];
+        topIndex = 0;
 
         // lager kortstokken
 
@@ -54,7 +55,7 @@ public class CardDeck {
 
     public Card getCard(int n) {
         if (n < 0 || n > this.cardDeck.length) {
-            throw new IllegalArgumentException("Du må oppgi en gydlig N-verdi!");
+            throw new IllegalArgumentException("Du må oppgi en gyldig N-verdi!");
         }
         char suit;
         if (n < this.n) {
@@ -71,9 +72,17 @@ public class CardDeck {
         return new Card(suit, face);
     }
 
-    
+    //funksjon for å trekke det øverste kortet i bunken
+    public Card drawCard () {
+        //sjekker om det er fler kort i bunken.
+        if (topIndex>=cardDeck.length) {
+            return "Kortstokken er tom!";
+        }
+        return cardDeck[topIndex++];
+    }
 
     
+//må kanskje finne en ny måte å stokke kortstokken på - den vil bli stokket likt for her gang --> helt like runder. 
 
 public void shufflePerfectly() {
     String[] shuffledCardDeck = new String[4*n];
@@ -87,13 +96,11 @@ public void shufflePerfectly() {
     for (int i = 1; i < halfSize+1; i++) {
         shuffledCardDeck[2*i-1]=secondHalf[i-1];
     }
-    // int index = 0; 
-    // for (int i = 0; i < halfSize; i++) {
-    //     shuffledCardDeck[index++] = firstHalf[i]; 
-    //     shuffledCardDeck[index++] = secondHalf[i];
-    // }
+    
+    //denne funker kanskje ikke
     this.cardDeck = Arrays.copyOf(shuffledCardDeck, shuffledCardDeck.length);
-   //this.cardDeck = shuffledCardDeck;
+
+   //this.cardDeck = shuffledCardDeck; <-- tidligere løsning, usikker på om denne faktisk funket.
     
 }
 

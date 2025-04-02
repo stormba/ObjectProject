@@ -6,3 +6,6 @@ Vi trenger en card-klasse som har kortstokken - her kan vi bruke den vi allerede
 
 Vi trenger en klasse som kan reglene??
 
+Issues:
+-fikse package??!!
+
