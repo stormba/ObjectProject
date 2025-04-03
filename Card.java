@@ -1,15 +1,13 @@
 
-
-
 public final class Card {
     char suit;
     int face;
     
     public Card(char suit, int face) {
-        
+        //'♠', '♥', '♦', '♣'
         //suit er enten S, C, D, H
-        if (suit != 'C' && suit != 'S' && suit != 'H' && suit!='D') {
-            throw new IllegalArgumentException("Må enten være S, H, D eller C ");
+        if (suit != '♠' && suit != '♥' && suit != '♦' && suit!='♣') {
+            throw new IllegalArgumentException("Må enten være ♠, ♥, ♣ eller ♦ ");
         }
         this.suit = suit;
         //face mellom 1-13
@@ -32,7 +30,8 @@ public final class Card {
 
     @Override
     public String toString() {
-        return "" + suit + face + "";
+        String [] faceNames = {"", "A", "2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K"};
+        return suit + faceNames[face];
     }
 
     public static void main(String[] args) {

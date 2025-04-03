@@ -1,6 +1,8 @@
+package Old_files;
 
 
 import java.util.Arrays;
+
 
 public class CardDeck {
     public int n; // antall kort som skal legges til
@@ -72,17 +74,16 @@ public class CardDeck {
         return new Card(suit, face);
     }
 
-    //funksjon for å trekke det øverste kortet i bunken
-    public Card drawCard () {
-        //sjekker om det er fler kort i bunken.
-        if (topIndex>=cardDeck.length) {
+    
+    public Card drawCard(){
+        if (topIndex >= cardDeck.lenght) {
             return "Kortstokken er tom!";
         }
         return cardDeck[topIndex++];
     }
 
     
-//må kanskje finne en ny måte å stokke kortstokken på - den vil bli stokket likt for her gang --> helt like runder. 
+//må finne en ny måte å stokke kortstokken på - den vil bli stokket likt for her gang --> helt like runder. 
 
 public void shufflePerfectly() {
     String[] shuffledCardDeck = new String[4*n];
@@ -108,10 +109,7 @@ public void shufflePerfectly() {
 public static void main(String[] args) {
     CardDeck test = new CardDeck(2);
     System.out.println(Arrays.toString(test.cardDeck));
-    
-
-
-    
+     
 }
 
 
