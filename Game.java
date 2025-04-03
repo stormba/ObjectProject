@@ -5,15 +5,17 @@ public class Game {
     private Player player;
     private Dealer dealer;
     private Scanner scanner;
+    private int bet;
 
     public Game () {
         deck = new Deck();
         player = new Player("Spiller");
         dealer = new Dealer();
         scanner = new Scanner(System.in);
+        bet = 0;
     }
 
-    //startfunksjon, spilleren får 2 kort, samme gjør dealer
+    //startfunksjon, spilleren får 2 kort, samme gjør dealer. Annenhver
     public void start() {
         player.addCard(deck.drawCard());
         dealer.addCard(deck.drawCard());
@@ -25,9 +27,20 @@ public class Game {
 
         if (player.getHandValue() == 21 && dealer.getHandValue() != 21) {
             System.out.println("Gratulerer du fikk BlackJack og vant!");
+            return;
         }
         //forsikring hvis det første kortet til dealern er ess må implemeteres
+        if (dealer.getHand().get(0).getFace() == 1) {
+            System.out.println("Dealeren har et ess. Vil du ha forsikring? Ja (1) eller nei(2)?");
+            int choice = scanner.nextInt();
 
+            if (choice == 1) {
+                //IMPLEMENTER FORSIKRING HER!
+                System.out.println("Du har forikring!");
+
+            }
+            
+        }
         playerTurn();
         if (!player.isBusted()) {
             dealerTurn();
