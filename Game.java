@@ -17,6 +17,9 @@ public class Game {
 
     //startfunksjon, spilleren får 2 kort, samme gjør dealer. Annenhver
     public void start() {
+        
+
+        addBet();
         player.addCard(deck.drawCard());
         dealer.addCard(deck.drawCard());
         player.addCard(deck.drawCard());
@@ -27,6 +30,8 @@ public class Game {
 
         if (player.getHandValue() == 21 && dealer.getHandValue() != 21) {
             System.out.println("Gratulerer du fikk BlackJack og vant!");
+            int winnings = bet * 2;
+            player.addBalance(winnings);
             return;
         }
         //forsikring hvis det første kortet til dealern er ess må implemeteres
@@ -37,7 +42,7 @@ public class Game {
             if (choice == 1) {
                 //IMPLEMENTER FORSIKRING HER!
                 System.out.println("Du har forikring!");
-
+                
             }
             
         }
@@ -99,13 +104,36 @@ public class Game {
 
         if (player.isBusted()) {
             System.out.println("Dealer vinner.");
+            player.removeBalance(this.bet);
+            System.out.println("Din saldo: " + player.getBalance());
+
         } else if (dealer.isBusted() || playerScore > dealerScore) {
             System.out.println("Du vant. Gratulerer!");
+            System.out.println("Din saldo: " + player.getBalance());
+            player.addBalance(this.bet);
         } else if (dealerScore > playerScore) {
             System.out.println("Dealeren vinner.");
+            player.removeBalance(this.bet);
+            System.out.println("Din saldo: " + player.getBalance());
         } else {
             System.out.println("Uavgjort!");
+            System.out.println("Din saldo: " + player.getBalance());
         }
+    }
+
+    private void addBet(){
+        if (player.isBroke()) {
+            System.out.println("Du har ikke noe mer å spille for.");
+            return;
+        }
+        System.out.println("Hvor mye ønsker du å spille for?");
+        int betAmount = scanner.nextInt();
+        if (betAmount > player.getBalance()) {
+            throw new IllegalArgumentException("Du har ikke nok penger.");
+        } else if (betAmount <= 0){
+            throw new IllegalArgumentException("Du kan ikke spille med negativ innsats.");
+        }
+        this.bet = betAmount;
     }
 
 
