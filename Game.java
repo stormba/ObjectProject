@@ -5,15 +5,26 @@ public class Game {
     private Player player;
     private Dealer dealer;
     private Scanner scanner;
-    private int bet;
+    public double bet;
 
     public Game () {
-        deck = new Deck();
-        player = new Player("Spiller");
-        dealer = new Dealer();
-        scanner = new Scanner(System.in);
-        bet = 0;
+        this.deck = new Deck();
+        this.player = new Player("Spiller");
+        this.dealer = new Dealer();
+        this.bet = 0;
     }
+
+    // public Game (Player existingPlayer) {
+    //     this.deck = new Deck();
+    //     this.player = existingPlayer;
+    //     this.dealer = new Dealer();
+    //     this.bet = 0;
+    //     this.scanner = new Scanner(System.in);
+
+    // }
+
+
+    
 
     //startfunksjon, spilleren får 2 kort, samme gjør dealer. Annenhver
     public void start() {
@@ -30,7 +41,7 @@ public class Game {
 
         if (player.getHandValue() == 21 && dealer.getHandValue() != 21) {
             System.out.println("Gratulerer du fikk BlackJack og vant!");
-            int winnings = bet * 2;
+            double winnings = bet * 2;
             player.addBalance(winnings);
             return;
         }
@@ -134,6 +145,22 @@ public class Game {
             throw new IllegalArgumentException("Du kan ikke spille med negativ innsats.");
         }
         this.bet = betAmount;
+    }
+
+    public Player getPlayer() {
+        return this.player;
+    }
+
+    public Dealer getDealer(){
+        return this.dealer;
+    }
+
+    public Deck getDeck() {
+        return this.deck;
+    }
+
+    public double getBet(){
+        return this.bet;
     }
 
 

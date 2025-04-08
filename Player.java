@@ -6,18 +6,22 @@ public class Player {
     private Hand hand;
     private int balance;
     
-    // private Scanner scanner;
+    
 
-
+    //konstruktør for NYE spillere
     public Player (String name) {
         this.name = name;
         this.hand = new Hand();
-        this.balance = getBalance(); //startsaldo
+        this.balance = 1000; //startsaldo
         
     }
 
     public void addCard(Card card) {
         hand.addCard(card);
+    }
+
+    public void clearHand(){
+        this.hand = new Hand();
     }
 
     public int getHandValue () {
@@ -32,10 +36,10 @@ public class Player {
 
     // }
 
-    public void addBalance(int amount){
+    public void addBalance(double amount){
         this.balance+=amount;
     }
-    public void removeBalance(int amount){
+    public void removeBalance(double amount){
         this.balance-=amount;
     }
 
@@ -44,7 +48,7 @@ public class Player {
     }
 
     public boolean isBroke(){
-        return balance<1;
+        return this.balance<1;
     }
 
     public boolean isBusted() {
@@ -53,7 +57,7 @@ public class Player {
     }
 
     public String getName(){
-        return name;
+        return this.name;
     }
 
     public void printHand() {
